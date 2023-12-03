@@ -5,5 +5,9 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
+    - uses: actions/checkout@master
     - name: Get Containerlab Version
       run: containerlab version
+    - name: Run topology file
+      run: |
+        containerlab deploy -t topology.yml
