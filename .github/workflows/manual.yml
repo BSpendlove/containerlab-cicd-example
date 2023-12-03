@@ -8,11 +8,20 @@ jobs:
     - uses: actions/checkout@master
     - name: Get Containerlab Version
       run: containerlab version
+    - name: Setup Python Environment
+      run: |
+        python3 -m venv .venv
+        source .venv/bin/active
+        pip install -r requirements.txt
     - name: Deploy Lab
       run: containerlab deploy -t topology.yml
     - name: Sleep for 30 seconds
       run: sleep 30s
-    - name: Print first boot configuration
-      run: cat clab-xrdtest/*/first-boot.cfg
+    - name: Run pytest
+      run: pytest -s test_reachability.py -p no:warnings
+    - name: Destroy Python Environment
+      run: |
+        deactivate
+        rm -r .venv
     - name: Destroy lab
       run: containerlab destroy -t topology.yml --cleanup
