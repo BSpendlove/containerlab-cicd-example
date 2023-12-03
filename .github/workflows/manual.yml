@@ -21,9 +21,7 @@ jobs:
     - name: Run pytest
       run: pytest -s test_reachability.py -p no:warnings
     - name: Destroy Python Environment
-      run: |
-        deactivate
-        rm -r .venv
+      run: rm -r .venv || true
       if: success() || failure()
     - name: Destroy lab
       run: containerlab destroy -t topology.yml --cleanup
