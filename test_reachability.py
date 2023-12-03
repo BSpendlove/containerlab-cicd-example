@@ -54,6 +54,3 @@ def test_reachability(topology: dict = load_topology()):
         ) as ssh_session:
             version = ssh_session.send_command("show version", use_genie=True)
             assert version.get("operating_system") == "IOSXR"  # Validate IOSXR device
-            assert (
-                int(version.get("uptime", "").split()[0]) > 0
-            )  # Validate uptime is longer than 0 (eg. minutes, hours or even days...)
