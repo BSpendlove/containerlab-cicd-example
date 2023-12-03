@@ -8,6 +8,11 @@ jobs:
     - uses: actions/checkout@master
     - name: Get Containerlab Version
       run: containerlab version
-    - name: Run topology file
-      run: |
-        containerlab deploy -t topology.yml
+    - name: Deploy Lab
+      run: containerlab deploy -t topology.yml
+    - name: Sleep for 30 seconds
+      run: sleep 30s
+    - name: Print first boot configuration
+      run: cat clab-xrdtest/*/first-boot.cfg
+    - name: Destroy lab
+      run: containerlab destroy -t topology.yml --cleanup
