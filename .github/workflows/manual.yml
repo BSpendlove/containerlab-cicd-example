@@ -12,6 +12,7 @@ jobs:
       run: |
         python3 -m venv .venv
         source .venv/bin/activate
+        echo PATH=$PATH >> $GITHUB_ENV
         pip install -r requirements.txt
     - name: Deploy Lab
       run: containerlab deploy -t topology.yml
