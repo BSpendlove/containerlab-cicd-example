@@ -24,5 +24,7 @@ jobs:
       run: |
         deactivate
         rm -r .venv
+      if: success() || failure()
     - name: Destroy lab
       run: containerlab destroy -t topology.yml --cleanup
+      if: success() || failure()
